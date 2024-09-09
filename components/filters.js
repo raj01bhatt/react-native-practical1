@@ -1,32 +1,44 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 
-export default function Filter() {
+export default function Filter({
+  allTasks,
+  pandingTask,
+  completedTask,
+  setFilter = () => {},
+  filter,
+}) {
   return (
     <>
       <View style={styles.filter}>
         <View>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => Alert.alert("Button Pressed!")}
+            style={[styles.button, filter === "All" && styles.selected]}
+            onPress={() => setFilter("All")}
           >
-            <Text style={styles.buttonText}>{"All"}</Text>
+            <Text style={styles.buttonText}>
+              {"All"} ({allTasks})
+            </Text>
           </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => Alert.alert("Button Pressed!")}
+            style={[styles.button, filter === "Panding" && styles.selected]}
+            onPress={() => setFilter("Panding")}
           >
-            <Text style={styles.buttonText}>{"Panding"}</Text>
+            <Text style={styles.buttonText}>
+              {"Panding"} ({pandingTask})
+            </Text>
           </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => Alert.alert("Button Pressed!")}
+            style={[styles.button, filter === "Completed" && styles.selected]}
+            onPress={() => setFilter("Completed")}
           >
-            <Text style={styles.buttonText}>{"Completed"}</Text>
+            <Text style={styles.buttonText}>
+              {"Completed"} ({completedTask})
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -36,10 +48,10 @@ export default function Filter() {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#fff",
-    padding: 15,
+    backgroundColor: "#F7F5F2",
+    padding: 10,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: 5,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -49,10 +61,11 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    minWidth: "30%",
   },
   buttonText: {
     color: "#000",
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: "bold",
   },
   filter: {
@@ -62,5 +75,11 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 10,
     marginBottom: 10,
+    borderBottomWidth: 1,
+    borderColor: "#ddd",
+  },
+  selected: {
+    borderColor: "#61dafb",
+    borderWidth: 2,
   },
 });
